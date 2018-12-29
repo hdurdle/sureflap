@@ -11,5 +11,19 @@ The script behaviour is mostly self evident. If, like me, you just want to grab 
 
 It appears to be a pretty well constructed and fully featured REST API. I even managed to accidentally create new objects by POSTing when I meant to GET, and it responds to DELETE correctly too.
 
+### Notes
+
+Currently the scripts don't do any checking to see if the parameters are missing so die if they're not provided.
+
+For example, you need to pass the ID of a pet to this:
+
+`.\Get-SureFlapPetLocation.ps1 <ID_of_Pet>`
+
+and either the household ID, or the ID of a user to:
+
+`.\Get-SureFlapUser.ps1 -householdID <householdID>`
+or
+`.\Get-SureFlapUser.ps1 -userID <userID>`
+
 ### Thanks
 Thanks to [alextoft](https://github.com/alextoft) and his [sureflap](https://github.com/alextoft/sureflap) project for the initial pointers. Further bits of the API were discovered by fiddling with the site itself at https://surepetcare.io.
