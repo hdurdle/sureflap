@@ -25,5 +25,23 @@ and either the household ID, or the ID of a user to:
 or
 `.\Get-SureFlapUser.ps1 -userID <userID>`
 
+#### Get-Locations.ps1
+
+If you have multiple cat flaps, you can define the flaps, and where they lead (which rooms/zones they connect).
+
+Edit Get-Locations.ps1 and add rows at the top for each pet flap you have.
+
+Format is:
+
+`( device_id, "location-inbound", "location-outbound", "name-of-petflap" )`
+
+for example:
+`( 123456, "house", "garden", "backdoor")`
+
+leave the final `$null` row (this makes sure it works when you've manually set pet's inside/outside state)
+
+You can list your flap IDs with: `.\Get-SureFlapDevice.ps1 | ?{$_.product_id -gt 1} | Select id, name`
+
+
 ### Thanks
 Thanks to [alextoft](https://github.com/alextoft) and his [sureflap](https://github.com/alextoft/sureflap) project for the initial pointers. Further bits of the API were discovered by fiddling with the site itself at https://surepetcare.io.
