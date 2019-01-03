@@ -14,11 +14,11 @@ $flaps =
 	(  $null, "[inside]", "[outside]","") | % { [PSCustomObject]@{id = $_[0]; in = $_[1]; out = $_[2]; name = $_[3] } }
 $flapColumns=	$flaps[0].PSObject.Properties.name
 # --------------------------------------------------------------------------------
-$sureFlapObject = .\Get-SureFlapStart.ps1
+$sureFlapObject = .\Get-SureFlapPet.ps1
 
 $petInfo = @( )
 
-ForEach ($pet in $sureFlapObject.pets)
+ForEach ($pet in $sureFlapObject)
 {
 	$sinceDate = [DateTime]::ParseExact($pet.position.since, 'yyyy-MM-ddTHH:mm:ss+00:00', $null)
 	$duration = New-TimeSpan -Start $sinceDate
@@ -31,8 +31,8 @@ ForEach ($pet in $sureFlapObject.pets)
 	$petObject = New-Object -TypeName PSObject
 	$petObject | Add-Member -Name 'Name' -MemberType Noteproperty -Value $pet.name
 	$petObject | Add-Member -Name 'Location' -MemberType Noteproperty -Value $location
-	$petObject | Add-Member -Name 'Since' -MemberType Noteproperty -Value $sinceDate
-	$petObject | Add-Member -Name 'Duration' -MemberType Noteproperty -Value  ("{0:hh}h {0:mm}m" -f $duration)
+	$petObject | Add-Member -Name 'Since' -MemberType Noteproperty -Value ("{0:dd}-{0:MMM} {0:t}" -f $sinceDate)
+	$petObject | Add-Member -Name 'Duration' -MemberType Noteproperty -Value  ("{0:%d}d {0:hh}h {0:mm}m" -f $duration)
 
 	$petInfo += $petObject
 }
