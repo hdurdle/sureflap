@@ -18,5 +18,5 @@ $postParams = @{
 
 $postParams
 
-#$res = Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $postParams -ContentType "application/json"
-#$res.data
+$res = Invoke-RestMethod -Method Post -Uri $uri -Headers $headers -Body $postParams -ContentType "application/json"
+$res.data
